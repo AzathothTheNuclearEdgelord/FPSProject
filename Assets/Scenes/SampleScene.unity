@@ -819,7 +819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 200
   playerBody: {fileID: 820190130}
-  gunBarrel: {fileID: 0}
+  gunBarrel: {fileID: 998786164}
 --- !u!1 &998786163
 GameObject:
   m_ObjectHideFlags: 0
