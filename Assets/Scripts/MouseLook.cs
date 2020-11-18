@@ -7,17 +7,20 @@ public class MouseLook : MonoBehaviour{
     public float mouseSensitivity = 100;
     public Transform playerBody;
 
-    private float rayDistance = 10f;
+    private float rayDistance = 20f;
     private Ray ray;
     private RaycastHit hit;
 
     public Transform gunBarrel;
+
+    public GameObject bulletTest;
 
     private void Start(){
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update(){
+        Debug.DrawRay(gunBarrel.position, transform.forward, Color.red);
         if (Input.GetButtonDown("Fire1"))
             Shoot();
 
@@ -32,12 +35,14 @@ public class MouseLook : MonoBehaviour{
     }
 
     private void Shoot(){
-        ray = new Ray(gunBarrel.position, transform.forward);
-
-        Debug.DrawRay(gunBarrel.position, transform.forward, Color.red);
+        ray = new Ray(transform.position, transform.forward);
 
         if (Physics.Raycast(ray, out hit, rayDistance)){
-            print("Shit hit");
+            Instantiate(bulletTest, hit.collider.transform);
+            if (hit.collider.CompareTag("EvilCube")){
+                Destroy(hit.collider.gameObject);
+                print("Hit and eliminated the heretic!");
+            }
         }
     }
 }
